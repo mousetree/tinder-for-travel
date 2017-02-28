@@ -8,7 +8,6 @@ function ExperienceCard (props) {
       <button className="dislike" onClick={() => props.onDislike(props)}>Dislike</button>
       <button className="like" onClick={() => props.onLike(props)}>Like</button>
     </div>
-
   )
 }
 
