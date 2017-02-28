@@ -1,4 +1,4 @@
-# Travel with Tinder
+# Tinder for Travel
 
 Tebogo and Adam make an app a day.
 
