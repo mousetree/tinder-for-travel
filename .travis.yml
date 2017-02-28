@@ -12,3 +12,4 @@ deploy:
   provider: surge
   project: ./build/
   domain: travel.admm.io
+  skip_cleanup: true
