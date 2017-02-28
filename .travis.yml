@@ -8,5 +8,7 @@ cache:
 script:
   - npm test
   - npm run build
-after_success:
-  - npm run deploy
+deploy:
+  provider: surge
+  project: ./build/
+  domain: travel.admm.io
