@@ -5,7 +5,8 @@
   "devDependencies": {
     "enzyme": "^2.7.1",
     "react-addons-test-utils": "^15.4.2",
-    "react-scripts": "0.9.2"
+    "react-scripts": "0.9.2",
+    "surge": "^0.18.0"
   },
   "dependencies": {
     "react": "^15.4.2",
@@ -15,6 +16,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "surge --project ./build --domain tinder-for-travel.surge.sh"
   }
 }
