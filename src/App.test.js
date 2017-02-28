@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import {shallow, mount} from 'enzyme';
 import App from './App';
 import ExperienceStack from './components/ExperienceStack';
 import API from './api';
@@ -30,8 +30,38 @@ describe('handleLike()', () => {
     expect(wrapper.state().likedExperiences[0]).toEqual(mockExperience);
   });
 
-  it('should pop the first experience from `state.experiences`', () => {
+  it('should pop the first experience from `state.experiences`', (done) => {
+    const wrapper = mount(<App/>);
+    API.getExperiences().then((experiences) => {
+      expect(wrapper.state().experiences.length).toEqual(experiences.length);
+      const mockExperience = {title: 'Mock in Moscow'};
+      wrapper.instance().handleDislike(mockExperience);
+      expect(wrapper.state().experiences.length).toEqual(experiences.length - 1);
+      expect(wrapper.state.experiences[0].title).not.toEqual(experiences[0].title);
+      done();
+    }).catch(done);
+  });
+});
+
+describe('handleDislike()', () => {
+
+  it('should *not* add the new experience to `state.likedExperiences`', () => {
     const wrapper = shallow(<App/>);
-    // TODO: mock me?
+    expect(wrapper.state().likedExperiences.length).toEqual(0);
+    const mockExperience = {title: 'Mock in Moscow'};
+    wrapper.instance().handleDislike(mockExperience);
+    expect(wrapper.state().likedExperiences.length).toEqual(0);
+  });
+
+  it('should pop the first experience from `state.experiences`', (done) => {
+    const wrapper = mount(<App/>);
+    API.getExperiences().then((experiences) => {
+      expect(wrapper.state().experiences.length).toEqual(experiences.length);
+      const mockExperience = {title: 'Mock in Moscow'};
+      wrapper.instance().handleDislike(mockExperience);
+      expect(wrapper.state().experiences.length).toEqual(experiences.length - 1);
+      expect(wrapper.state.experiences[0].title).not.toEqual(experiences[0].title);
+      done();
+    }).catch(done);
   });
 });

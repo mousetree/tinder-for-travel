@@ -19,7 +19,7 @@ class App extends Component {
       this.setState({
         experiences: experiences
       })
-    }).catch(error => console.log(error))
+    });
   }
 
   render() {
