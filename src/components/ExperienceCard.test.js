@@ -6,9 +6,9 @@ const experienceMock = {
   title: 'MockJapan'
 };
 
-it('should display the card title', () => {
+it('should display the experience title', () => {
   const wrapper = shallow(<ExperienceCard {...experienceMock} onLike={jest.fn()} onDislike={jest.fn()}/>);
-  expect(wrapper.contains('MockJapan')).toEqual(true);
+  expect(wrapper.contains(experienceMock.title)).toEqual(true);
 });
 
 it('should contain a `Like` button', () => {
