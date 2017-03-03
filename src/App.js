@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ExperienceStack from './components/ExperienceStack';
+import LinearProgress from 'material-ui/LinearProgress';
 import API from './api';
 
 class App extends Component {
@@ -8,7 +9,9 @@ class App extends Component {
     super(props);
     this.state = {
       experiences: [],
-      likedExperiences: []
+      likedExperiences: [],
+      count: 0,
+      experienceCount: 0
     };
     this.handleLike = this.handleLike.bind(this);
     this.handleDislike = this.handleDislike.bind(this);
@@ -17,7 +20,8 @@ class App extends Component {
   componentDidMount () {
     API.getExperiences().then(experiences => {
       this.setState({
-        experiences: experiences
+        experiences: experiences,
+        experienceCount: experiences.length
       })
     });
   }
@@ -26,9 +30,10 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Tinder for Travel</h1>
-        <p>
-          You have liked {this.state.likedExperiences.length} things
-        </p>
+        <LinearProgress
+          mode="determinate"
+          value={this.state.count / this.state.experienceCount * 100}
+        />
         <ExperienceStack
           experiences={this.state.experiences}
           onLike={this.handleLike}
@@ -41,6 +46,7 @@ class App extends Component {
   handleLike (experience) {
     this.setState(prevState => {
       return {
+        count: prevState.count + 1,
         likedExperiences: [
           ...prevState.likedExperiences,
           experience
@@ -53,6 +59,7 @@ class App extends Component {
   handleDislike (experience) {
     this.setState(prevState => {
       return {
+        count: prevState.count + 1,
         experiences: prevState.experiences.slice(1, prevState.experiences.length)
       }
     })

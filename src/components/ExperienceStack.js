@@ -6,7 +6,6 @@ function ExperienceStack (props) {
   const experience = props.experiences[0];
   return (
     <div>
-      <h3>This is the stack</h3>
       {
         props.experiences.length ?
           <ExperienceCard {...experience} onLike={props.onLike} onDislike={props.onDislike}/> :
